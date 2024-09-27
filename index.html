@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vem pra o IDE</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #a9f08f; /* Cor de fundo semelhante à imagem */
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background-color: #7fc864; /* Cor de fundo do card */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            background-color: #60994b; /* Cor dos botões */
+            color: #0f1a10;
+            text-decoration: none;
+            border-radius: 5px;
+            width: 80%;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #7fc864;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Adicione aqui o caminho para a logo em PNG -->
+        <img src="IDELOGO.PNG" alt="Logo IDE - Devocional Federal" class="logo">
+        <h1 id="mensagem">Mensagem Bíblica</h1>
+        <a href="#" class="btn" onclick="copiarMensagem()">COPIAR</a>
+        <a href="#" class="btn" onclick="compartilharMensagem()">COMPARTILHAR</a>
+        <p class="footer">IDE - Devocional Federal - IF-IP</p>
+    </div>
+
+    <script>
+        // Array de mensagens bíblicas
+        const mensagens = [
+            "E não nos cansemos de fazer o bem, pois no tempo próprio colheremos, se não desanimarmos. (Gálatas 6:9)",
+            "Tudo posso naquele que me fortalece. (Filipenses 4:13)",
+            "Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor, planos de fazê-los prosperar e não de causar dano, planos de dar a vocês esperança e um futuro. (Jeremias 29:11)",
+            "O Senhor é o meu pastor e nada me faltará. (Salmos 23:1)",
+            "Lâmpada para os meus pés é a tua palavra, e luz para o meu caminho. (Salmos 119:105)",
+            "Mil poderão cair ao seu lado; dez mil, à sua direita, mas nada o atingirá. (Salmos 91:7)",
+            "Sim, coisas grandiosas fez o Senhor por nós, por isso estamos alegres. (Salmos 126:3)",
+            "IDE devocional federal - toda quarta ás 08:30 na praça das mangueiras, em frente a sala do neabi e do antigo grêmio"
+        ];
+
+        // Função para gerar uma mensagem aleatória
+        function gerarMensagem() {
+            const index = Math.floor(Math.random() * mensagens.length);
+            document.getElementById('mensagem').innerText = mensagens[index];
+        }
+
+        // Função para copiar a mensagem
+        function copiarMensagem() {
+            const mensagem = document.getElementById('mensagem').innerText;
+            navigator.clipboard.writeText(mensagem).then(() => {
+                alert("Mensagem copiada!");
+            });
+        }
+
+        // Função para compartilhar a mensagem
+        function compartilharMensagem() {
+            const mensagem = document.getElementById('mensagem').innerText;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Mensagem Bíblica',
+                    text: mensagem,
+                }).then(() => {
+                    alert('Mensagem compartilhada com sucesso!');
+                }).catch((error) => {
+                    console.error('Erro ao compartilhar:', error);
+                });
+            } else {
+                alert('Compartilhamento não suportado neste navegador.');
+            }
+        }
+
+        // Gera uma nova mensagem ao carregar a página
+        window.onload = gerarMensagem;
+    </script>
+</body>
+</html>
